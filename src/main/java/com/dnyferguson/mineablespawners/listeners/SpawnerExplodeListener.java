@@ -3,9 +3,11 @@ package com.dnyferguson.mineablespawners.listeners;
 import com.cryptomorin.xseries.XMaterial;
 import com.dnyferguson.mineablespawners.MineableSpawners;
 import com.dnyferguson.mineablespawners.utils.Chat;
+import com.dnyferguson.mineablespawners.utils.SpawnerUtils;
 import de.tr7zw.changeme.nbtapi.NBTItem;
 import org.bukkit.block.Block;
 import org.bukkit.block.CreatureSpawner;
+import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -48,10 +50,11 @@ public class SpawnerExplodeListener implements Listener {
             }
 
             CreatureSpawner spawner = (CreatureSpawner) block.getState();
+            EntityType spawnedType = SpawnerUtils.getSpawnedType(spawner);
 
             ItemStack item = new ItemStack(XMaterial.SPAWNER.parseMaterial());
             ItemMeta meta = item.getItemMeta();
-            String mobFormatted = Chat.uppercaseStartingLetters(spawner.getSpawnedType().toString());
+            String mobFormatted = Chat.uppercaseStartingLetters(spawnedType.toString());
 
             if (meta != null) {
                 meta.setDisplayName(plugin.getConfigurationHandler().getMessage("global", "name").replace("%mob%", mobFormatted));
@@ -66,7 +69,7 @@ public class SpawnerExplodeListener implements Listener {
             }
 
             NBTItem nbti = new NBTItem(item);
-            nbti.setString("ms_mob", spawner.getSpawnedType().name());
+            nbti.setString("ms_mob", spawnedType.name());
 
             item = nbti.getItem();
 

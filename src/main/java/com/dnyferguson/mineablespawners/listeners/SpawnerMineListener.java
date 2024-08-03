@@ -3,6 +3,7 @@ package com.dnyferguson.mineablespawners.listeners;
 import com.cryptomorin.xseries.XMaterial;
 import com.dnyferguson.mineablespawners.MineableSpawners;
 import com.dnyferguson.mineablespawners.utils.Chat;
+import com.dnyferguson.mineablespawners.utils.SpawnerUtils;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -75,7 +76,7 @@ public class SpawnerMineListener implements Listener {
         // get spawner location & type
         Location loc = block.getLocation();
         CreatureSpawner spawner = (CreatureSpawner) block.getState();
-        EntityType entityType = spawner.getSpawnedType();
+        EntityType entityType = SpawnerUtils.getSpawnedType(spawner);
 
         // check if should give exp
         if (!plugin.getConfigurationHandler().getBoolean("mining", "drop-exp") || minedSpawners.contains(loc)) {

@@ -2,9 +2,11 @@ package com.dnyferguson.mineablespawners.listeners;
 
 import com.cryptomorin.xseries.XMaterial;
 import com.dnyferguson.mineablespawners.MineableSpawners;
+import com.dnyferguson.mineablespawners.utils.SpawnerUtils;
 import org.bukkit.Material;
 import org.bukkit.block.CreatureSpawner;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
@@ -63,7 +65,8 @@ public class EggChangeListener implements Listener {
         }
 
         CreatureSpawner spawner = (CreatureSpawner) e.getClickedBlock().getState();
-        String from = spawner.getSpawnedType().toString().replace("_", " ").toLowerCase();
+        EntityType spawnedType = SpawnerUtils.getSpawnedType(spawner);
+        String from = spawnedType.toString().replace("_", " ").toLowerCase();
 
         if (from.equals(to)) {
             e.setCancelled(true);
