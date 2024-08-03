@@ -6,7 +6,7 @@
 
     <groupId>com.dnyferguson</groupId>
     <artifactId>MineableSpawners</artifactId>
-    <version>3.1.5</version>
+    <version>3.2.0</version>
     <packaging>jar</packaging>
 
     <name>MineableSpawners</name>
@@ -65,6 +65,12 @@
                 </configuration>
             </plugin>
         </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
     </build>
 
     <repositories>
