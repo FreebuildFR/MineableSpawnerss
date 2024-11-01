@@ -27,6 +27,7 @@ public class SpawnerExplodeListener implements Listener {
 
     @EventHandler (ignoreCancelled = true, priority = EventPriority.MONITOR)
     public void onSpawnerExplode(EntityExplodeEvent e) {
+
         if (!plugin.getConfigurationHandler().getBoolean("explode", "drop")) {
             return;
         }
@@ -34,6 +35,9 @@ public class SpawnerExplodeListener implements Listener {
         if (e.getLocation().getWorld() != null && plugin.getConfigurationHandler().getList("explode", "blacklisted-worlds").contains(e.getLocation().getWorld().getName())) {
             return;
         }
+
+        if (e.getEntityType() == EntityType.BREEZE_WIND_CHARGE)
+          return;
 
         for (Block block : e.blockList()) {
             if (!block.getType().equals(XMaterial.SPAWNER.parseMaterial())) {
